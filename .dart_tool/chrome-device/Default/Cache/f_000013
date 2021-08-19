@@ -1,0 +1,343 @@
+define(['dart_sdk'], (function load__packages__state_notifier__state_notifier_dart(dart_sdk) {
+  'use strict';
+  const core = dart_sdk.core;
+  const collection = dart_sdk.collection;
+  const async = dart_sdk.async;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  var state_notifier = Object.create(dart.library);
+  var $isNotEmpty = dartx.isNotEmpty;
+  dart._checkModuleNullSafetyMode(false);
+  var T$ = {
+    boolL: () => (T$.boolL = dart.constFn(dart.legacy(core.bool)))(),
+    VoidToboolL: () => (T$.VoidToboolL = dart.constFn(dart.fnType(T$.boolL(), [])))(),
+    VoidToNull: () => (T$.VoidToNull = dart.constFn(dart.fnType(core.Null, [])))(),
+    VoidToNull$1: () => (T$.VoidToNull$1 = dart.constFn(dart.gFnType(T => [core.Null, []])))(),
+    StateNotifierL: () => (T$.StateNotifierL = dart.constFn(dart.legacy(state_notifier.StateNotifier)))(),
+    VoidToTargetL: () => (T$.VoidToTargetL = dart.constFn(dart.gFnType(Target => {
+      var TargetL = () => (TargetL = dart.constFn(dart.legacy(Target)))();
+      return [TargetL(), []];
+    })))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  var I = [
+    "file:///C:/Users/KIIT/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/state_notifier-0.6.0/lib/state_notifier.dart",
+    "package:state_notifier/state_notifier.dart"
+  ];
+  var onError = dart.privateName(state_notifier, "StateNotifier.onError");
+  var _listeners = dart.privateName(state_notifier, "_listeners");
+  var _mounted = dart.privateName(state_notifier, "_mounted");
+  var _controller = dart.privateName(state_notifier, "_controller");
+  var _debugCanAddListeners = dart.privateName(state_notifier, "_debugCanAddListeners");
+  var _state$ = dart.privateName(state_notifier, "_state");
+  var _debugSetCanAddListeners = dart.privateName(state_notifier, "_debugSetCanAddListeners");
+  var _debugIsMounted = dart.privateName(state_notifier, "_debugIsMounted");
+  const _is_StateNotifier_default = Symbol('_is_StateNotifier_default');
+  state_notifier.StateNotifier$ = dart.generic(T => {
+    var TL = () => (TL = dart.constFn(dart.legacy(T)))();
+    var _ListenerEntryOfTL = () => (_ListenerEntryOfTL = dart.constFn(state_notifier._ListenerEntry$(TL())))();
+    var _ListenerEntryLOfTL = () => (_ListenerEntryLOfTL = dart.constFn(dart.legacy(_ListenerEntryOfTL())))();
+    var LinkedListOf_ListenerEntryLOfTL = () => (LinkedListOf_ListenerEntryLOfTL = dart.constFn(collection.LinkedList$(_ListenerEntryLOfTL())))();
+    var StreamControllerOfTL = () => (StreamControllerOfTL = dart.constFn(async.StreamController$(TL())))();
+    var TLTovoid = () => (TLTovoid = dart.constFn(dart.fnType(dart.void, [TL()])))();
+    var TLToLvoid = () => (TLToLvoid = dart.constFn(dart.legacy(TLTovoid())))();
+    class StateNotifier extends core.Object {
+      get onError() {
+        return this[onError];
+      }
+      set onError(value) {
+        this[onError] = value;
+      }
+      get mounted() {
+        return this[_mounted];
+      }
+      get stream() {
+        this[_controller] == null ? this[_controller] = StreamControllerOfTL().broadcast() : null;
+        return this[_controller].stream;
+      }
+      [_debugSetCanAddListeners](value) {
+        if (!dart.test(dart.fn(() => {
+          this[_debugCanAddListeners] = value;
+          return true;
+        }, T$.VoidToboolL())())) dart.assertFailed(null, I[0], 118, 12, "() {\n      _debugCanAddListeners = value;\n      return true;\n    }()");
+        return true;
+      }
+      [_debugIsMounted]() {
+        if (!dart.test(dart.fn(() => {
+          if (!dart.test(this[_mounted])) {
+            dart.throw(new core.StateError.new("Tried to use " + dart.str(this.runtimeType) + " after `dispose` was called.\n\nConsider checking `mounted`.\n"));
+          }
+          return true;
+        }, T$.VoidToboolL())())) dart.assertFailed(null, I[0], 126, 12, "() {\n      if (!_mounted) {\n        throw StateError('''\nTried to use $runtimeType after `dispose` was called.\n\nConsider checking `mounted`.\n''');\n      }\n      return true;\n    }()");
+        return true;
+      }
+      get state() {
+        if (!dart.test(this[_debugIsMounted]())) dart.assertFailed(null, I[0], 149, 12, "_debugIsMounted()");
+        return this[_state$];
+      }
+      set state(value) {
+        let t0, t1, t0$, t2, t1$;
+        TL().as(value);
+        if (!dart.test(this[_debugIsMounted]())) dart.assertFailed(null, I[0], 155, 12, "_debugIsMounted()");
+        this[_state$] = value;
+        t0 = this[_controller];
+        t0 == null ? null : t0.add(value);
+        let didThrow = false;
+        for (let listenerEntry of this[_listeners]) {
+          try {
+            t0$ = listenerEntry;
+            t1 = value;
+            TLToLvoid().as(t0$.listener)(t1);
+          } catch (e) {
+            let error = dart.getThrown(e);
+            let stackTrace = dart.stackTrace(e);
+            didThrow = true;
+            if (this.onError != null) {
+              t1$ = error;
+              t2 = stackTrace;
+              this.onError(t1$, t2);
+            } else {
+              async.Zone.current.handleUncaughtError(error, stackTrace);
+            }
+          }
+        }
+        if (didThrow) {
+          dart.throw(new core.Error.new());
+        }
+      }
+      get debugState() {
+        let result = null;
+        if (!dart.test(dart.fn(() => {
+          result = this[_state$];
+          return true;
+        }, T$.VoidToboolL())())) dart.assertFailed(null, I[0], 185, 12, "() {\n      result = _state;\n      return true;\n    }()");
+        return result;
+      }
+      get hasListeners() {
+        if (!dart.test(this[_debugIsMounted]())) dart.assertFailed(null, I[0], 194, 12, "_debugIsMounted()");
+        return this[_listeners][$isNotEmpty];
+      }
+      addListener(listener, opts) {
+        let t2;
+        let fireImmediately = opts && 'fireImmediately' in opts ? opts.fireImmediately : true;
+        if (!dart.test(dart.fn(() => {
+          if (!dart.test(this[_debugCanAddListeners])) {
+            dart.throw(new core.ConcurrentModificationError.new());
+          }
+          return true;
+        }, T$.VoidToboolL())())) dart.assertFailed(null, I[0], 220, 12, "() {\n      if (!_debugCanAddListeners) {\n        throw ConcurrentModificationError();\n      }\n      return true;\n    }()");
+        if (!dart.test(this[_debugIsMounted]())) dart.assertFailed(null, I[0], 226, 12, "_debugIsMounted()");
+        let listenerEntry = new (_ListenerEntryOfTL()).new(listener);
+        this[_listeners].add(listenerEntry);
+        try {
+          if (!dart.test(this[_debugSetCanAddListeners](false))) dart.assertFailed(null, I[0], 230, 14, "_debugSetCanAddListeners(false)");
+          if (dart.test(fireImmediately)) {
+            listener(this.state);
+          }
+        } catch (e) {
+          let err = dart.getThrown(e);
+          let stack = dart.stackTrace(e);
+          listenerEntry.unlink();
+          t2 = this.onError;
+          t2 == null ? null : t2(err, stack);
+          dart.rethrow(e);
+        } finally {
+          if (!dart.test(this[_debugSetCanAddListeners](true))) dart.assertFailed(null, I[0], 239, 14, "_debugSetCanAddListeners(true)");
+        }
+        return dart.fn(() => {
+          if (listenerEntry.list != null) {
+            listenerEntry.unlink();
+          }
+        }, T$.VoidToNull());
+      }
+      dispose() {
+        let t2;
+        if (!dart.test(this[_debugIsMounted]())) dart.assertFailed(null, I[0], 255, 12, "_debugIsMounted()");
+        this[_listeners].clear();
+        t2 = this[_controller];
+        t2 == null ? null : t2.close();
+        this[_mounted] = false;
+      }
+    }
+    (StateNotifier.new = function(_state) {
+      this[_listeners] = new (LinkedListOf_ListenerEntryLOfTL()).new();
+      this[onError] = null;
+      this[_mounted] = true;
+      this[_controller] = null;
+      this[_debugCanAddListeners] = true;
+      this[_state$] = _state;
+      ;
+    }).prototype = StateNotifier.prototype;
+    dart.addTypeTests(StateNotifier);
+    StateNotifier.prototype[_is_StateNotifier_default] = true;
+    dart.addTypeCaches(StateNotifier);
+    dart.setMethodSignature(StateNotifier, () => ({
+      __proto__: dart.getMethods(StateNotifier.__proto__),
+      [_debugSetCanAddListeners]: dart.fnType(dart.legacy(core.bool), [dart.legacy(core.bool)]),
+      [_debugIsMounted]: dart.fnType(dart.legacy(core.bool), []),
+      addListener: dart.fnType(dart.legacy(dart.fnType(dart.void, [])), [dart.legacy(dart.fnType(dart.void, [dart.legacy(T)]))], {fireImmediately: dart.legacy(core.bool)}, {}),
+      dispose: dart.fnType(dart.void, [])
+    }));
+    dart.setGetterSignature(StateNotifier, () => ({
+      __proto__: dart.getGetters(StateNotifier.__proto__),
+      mounted: dart.legacy(core.bool),
+      stream: dart.legacy(async.Stream$(dart.legacy(T))),
+      state: dart.legacy(T),
+      debugState: dart.legacy(T),
+      hasListeners: dart.legacy(core.bool)
+    }));
+    dart.setSetterSignature(StateNotifier, () => ({
+      __proto__: dart.getSetters(StateNotifier.__proto__),
+      state: dart.legacy(core.Object)
+    }));
+    dart.setLibraryUri(StateNotifier, I[1]);
+    dart.setFieldSignature(StateNotifier, () => ({
+      __proto__: dart.getFields(StateNotifier.__proto__),
+      [_listeners]: dart.finalFieldType(dart.legacy(collection.LinkedList$(dart.legacy(state_notifier._ListenerEntry$(dart.legacy(T)))))),
+      onError: dart.fieldType(dart.legacy(dart.fnType(dart.void, [dart.dynamic, dart.legacy(core.StackTrace)]))),
+      [_mounted]: dart.fieldType(dart.legacy(core.bool)),
+      [_controller]: dart.fieldType(dart.legacy(async.StreamController$(dart.legacy(T)))),
+      [_debugCanAddListeners]: dart.fieldType(dart.legacy(core.bool)),
+      [_state$]: dart.fieldType(dart.legacy(T))
+    }));
+    return StateNotifier;
+  });
+  state_notifier.StateNotifier = state_notifier.StateNotifier$();
+  dart.addTypeTests(state_notifier.StateNotifier, _is_StateNotifier_default);
+  const _is__ListenerEntry_default = Symbol('_is__ListenerEntry_default');
+  state_notifier._ListenerEntry$ = dart.generic(T => {
+    class _ListenerEntry extends collection.LinkedListEntry {}
+    (_ListenerEntry.new = function(listener) {
+      this.listener = listener;
+      _ListenerEntry.__proto__.new.call(this);
+      ;
+    }).prototype = _ListenerEntry.prototype;
+    dart.addTypeTests(_ListenerEntry);
+    _ListenerEntry.prototype[_is__ListenerEntry_default] = true;
+    dart.addTypeCaches(_ListenerEntry);
+    dart.setLibraryUri(_ListenerEntry, I[1]);
+    dart.setFieldSignature(_ListenerEntry, () => ({
+      __proto__: dart.getFields(_ListenerEntry.__proto__),
+      listener: dart.finalFieldType(dart.legacy(dart.fnType(dart.void, [dart.legacy(T)])))
+    }));
+    return _ListenerEntry;
+  }, T => {
+    dart.setBaseClass(state_notifier._ListenerEntry$(dart.legacy(T)), collection.LinkedListEntry$(dart.legacy(state_notifier._ListenerEntry$(dart.legacy(T)))));
+  });
+  state_notifier._ListenerEntry = state_notifier._ListenerEntry$();
+  dart.addTypeTests(state_notifier._ListenerEntry, _is__ListenerEntry_default);
+  var _locator = dart.privateName(state_notifier, "_locator");
+  var _debugDidInitState = dart.privateName(state_notifier, "_debugDidInitState");
+  var _debugIsNotifierMounted = dart.privateName(state_notifier, "_debugIsNotifierMounted");
+  state_notifier.LocatorMixin = class LocatorMixin extends core.Object {};
+  state_notifier.LocatorMixin[dart.mixinOn] = Object => class LocatorMixin extends Object {
+    get read() {
+      if (!dart.test(this[_debugIsNotifierMounted]())) dart.assertFailed(null, I[0], 303, 12, "_debugIsNotifierMounted()");
+      return this[_locator];
+    }
+    set read(read) {
+      if (!dart.test(this[_debugIsNotifierMounted]())) dart.assertFailed(null, I[0], 308, 12, "_debugIsNotifierMounted()");
+      this[_locator] = read;
+    }
+    [_debugIsNotifierMounted]() {
+      if (!dart.test(dart.fn(() => {
+        if (T$.StateNotifierL().is(this)) {
+          let instance = T$.StateNotifierL().as(this);
+          if (!dart.test(instance[_debugIsMounted]())) dart.assertFailed(null, I[0], 316, 16, "instance._debugIsMounted()");
+        }
+        return true;
+      }, T$.VoidToboolL())())) dart.assertFailed(null, I[0], 313, 12, "() {\n      if (this is StateNotifier) {\n        final instance = this as StateNotifier;\n        assert(instance._debugIsMounted());\n      }\n      return true;\n    }()");
+      return true;
+    }
+    debugMockDependency(Dependency, value) {
+      if (!dart.test(this[_debugIsNotifierMounted]())) dart.assertFailed(null, I[0], 338, 12, "_debugIsNotifierMounted()");
+      if (!dart.test(dart.fn(() => {
+        let previousLocator = this.read;
+        this.read = dart.fn(Target => {
+          if (!dart.test(this[_debugIsNotifierMounted]())) dart.assertFailed(null, I[0], 342, 16, "_debugIsNotifierMounted()");
+          if (dart.wrapType(dart.legacy(Dependency))._equals(dart.wrapType(dart.legacy(Target)))) {
+            return dart.legacy(Target).as(value);
+          }
+          return previousLocator(dart.legacy(Target));
+        }, T$.VoidToTargetL());
+        return true;
+      }, T$.VoidToboolL())())) dart.assertFailed(null, I[0], 339, 12, "() {\n      final previousLocator = read;\n      read = <Target>() {\n        assert(_debugIsNotifierMounted());\n        if (Dependency == Target) {\n          return value as Target;\n        }\n        return previousLocator<Target>();\n      };\n      return true;\n    }()");
+    }
+    initState() {
+    }
+    update(watch) {
+    }
+    debugUpdate() {
+      if (!dart.test(dart.fn(() => {
+        if (!dart.test(this[_debugDidInitState])) {
+          this[_debugDidInitState] = true;
+          this.initState();
+        }
+        let locator = this.read;
+        this.read = dart.fn(T => dart.throw(new core.StateError.new("Cannot use `read` inside `update`")), T$.VoidToNull$1());
+        try {
+          this.update(locator);
+        } finally {
+          this.read = locator;
+        }
+        return true;
+      }, T$.VoidToboolL())())) dart.assertFailed(null, I[0], 381, 12, "() {\n      if (!_debugDidInitState) {\n        _debugDidInitState = true;\n        initState();\n      }\n\n      final locator = read;\n      read = <T>() => throw StateError('Cannot use `read` inside `update`');\n      try {\n        update(locator);\n      } finally {\n        read = locator;\n      }\n      return true;\n    }()");
+    }
+  };
+  (state_notifier.LocatorMixin[dart.mixinNew] = function() {
+    this[_locator] = dart.fn(T => dart.throw(new (state_notifier.DependencyNotFoundException$(dart.legacy(T))).new()), T$.VoidToNull$1());
+    this[_debugDidInitState] = false;
+  }).prototype = state_notifier.LocatorMixin.prototype;
+  dart.addTypeTests(state_notifier.LocatorMixin);
+  dart.addTypeCaches(state_notifier.LocatorMixin);
+  state_notifier.LocatorMixin[dart.implements] = () => [core.Object];
+  dart.setMethodSignature(state_notifier.LocatorMixin, () => ({
+    __proto__: dart.getMethods(state_notifier.LocatorMixin.__proto__),
+    [_debugIsNotifierMounted]: dart.fnType(dart.legacy(core.bool), []),
+    debugMockDependency: dart.gFnType(Dependency => [dart.void, [dart.legacy(Dependency)]]),
+    initState: dart.fnType(dart.void, []),
+    update: dart.fnType(dart.void, [dart.legacy(dart.gFnType(T => [dart.legacy(T), []]))]),
+    debugUpdate: dart.fnType(dart.void, [])
+  }));
+  dart.setGetterSignature(state_notifier.LocatorMixin, () => ({
+    __proto__: dart.getGetters(state_notifier.LocatorMixin.__proto__),
+    read: dart.legacy(dart.gFnType(T => [dart.legacy(T), []]))
+  }));
+  dart.setSetterSignature(state_notifier.LocatorMixin, () => ({
+    __proto__: dart.getSetters(state_notifier.LocatorMixin.__proto__),
+    read: dart.legacy(dart.gFnType(T => [dart.legacy(T), []]))
+  }));
+  dart.setLibraryUri(state_notifier.LocatorMixin, I[1]);
+  dart.setFieldSignature(state_notifier.LocatorMixin, () => ({
+    __proto__: dart.getFields(state_notifier.LocatorMixin.__proto__),
+    [_locator]: dart.fieldType(dart.legacy(dart.gFnType(T => [dart.legacy(T), []]))),
+    [_debugDidInitState]: dart.fieldType(dart.legacy(core.bool))
+  }));
+  const _is_DependencyNotFoundException_default = Symbol('_is_DependencyNotFoundException_default');
+  state_notifier.DependencyNotFoundException$ = dart.generic(T => {
+    class DependencyNotFoundException extends core.Object {}
+    (DependencyNotFoundException.new = function() {
+      ;
+    }).prototype = DependencyNotFoundException.prototype;
+    dart.addTypeTests(DependencyNotFoundException);
+    DependencyNotFoundException.prototype[_is_DependencyNotFoundException_default] = true;
+    dart.addTypeCaches(DependencyNotFoundException);
+    DependencyNotFoundException[dart.implements] = () => [core.Exception];
+    dart.setLibraryUri(DependencyNotFoundException, I[1]);
+    return DependencyNotFoundException;
+  });
+  state_notifier.DependencyNotFoundException = state_notifier.DependencyNotFoundException$();
+  dart.addTypeTests(state_notifier.DependencyNotFoundException, _is_DependencyNotFoundException_default);
+  dart.trackLibraries("packages/state_notifier/state_notifier.dart", {
+    "package:state_notifier/state_notifier.dart": state_notifier
+  }, {
+  }, '{"version":3,"sourceRoot":"","sources":["state_notifier.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MAmGgB;;;;;;;AAKM;MAAQ;;AAMqB,QAAnC,4BAAZ,oBAAgB,qCAAJ;AACZ,cAAO,AAAY;MACrB;iCAImC;AACjC,uBAAO,AAGN;AAF8B,UAA7B,8BAAwB,KAAK;AAC7B,gBAAO;;AAET,cAAO;MACT;;AAGE,uBAAO,AASN;AARC,yBAAK;AAKP,YAJI,WAAM,wBAAW,AAItB,2BAHW,oBAAW;;AAKnB,gBAAO;;AAET,cAAO;MACT;;AAYE,uBAAO;AACP,cAAO;MACT;gBAGY;;;AACV,uBAAO;AACO,QAAd,gBAAS,KAAK;AACS,aAAvB;4BAAa,OAAI,KAAK;AAElB,uBAAW;AACf,iBAAW,gBAAiB;AAC1B;AAC+B,kBAA7B,aAAa;iBAAU,KAAK;YAAN,eAAR;;gBACP;gBAAO;AACC,YAAf,WAAW;AACX,gBAAI;AACwB,oBAAlB,KAAK;mBAAE,UAAU;cAAzB,AAAO;;AAE4C,cAA9C,AAAQ,uCAAoB,KAAK,EAAE,UAAU;;;;AAIxD,YAAI,QAAQ;AACG,UAAb,WAAM;;MAEV;;AASI;AACF,uBAAO,AAGN;AAFgB,UAAf,SAAS;AACT,gBAAO;;AAET,cAAO,OAAM;MACf;;AAIE,uBAAO;AACP,cAAO,AAAW;MACpB;kBAqBc;;YACP;AAEL,uBAAO,AAKN;AAJC,yBAAK;AACgC,YAAnC,WAAM;;AAER,gBAAO;;AAET,uBAAO;AACD,4BAAgB,+BAAe,QAAQ;AAChB,QAA7B,AAAW,qBAAI,aAAa;AAC5B;AACE,yBAAO,+BAAyB;AAChC,wBAAI,eAAe;AACF,YAAf,AAAQ,QAAA,CAAC;;;cAEJ;cAAK;AACU,UAAtB,AAAc,aAAD;AACY,eAAzB;8BAAS,GAAK,GAAG,EAAE,KAAK;AACjB,UAAP;;AAEA,yBAAO,+BAAyB;;AAGlC,cAAO;AACL,cAAI,AAAc,aAAD;AACO,YAAtB,AAAc,aAAD;;;MAGnB;;;AAQE,uBAAO;AACW,QAAlB,AAAW;AACS,aAApB;4BAAa;AACG,QAAhB,iBAAW;MACb;;kCA7KmB;MAEb,mBAAa;MAYL;MAET,iBAAW;MAKI;MAQf,8BAAwB;MA7BV;;IAAO;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MAiLN;AAApB;;IAA6B;;;;;;;;;;;;;;;;;;;;;AAwC3B,qBAAO;AACP,YAAO;IACT;aAEiB;AACf,qBAAO;AACQ,MAAf,iBAAW,IAAI;IACjB;;AAGE,qBAAO,AAMN;AALC,YAAS,uBAAL;AACI,yBAAgB,uBAAL;AACjB,yBAAO,AAAS,QAAD;;AAEjB,cAAO;;AAET,YAAO;IACT;oCAgBgD;AAC9C,qBAAO;AACP,qBAAO,AAUN;AATO,8BAAkB;AAOvB,QAND,YAAe;AACb,yBAAO;AACP,cAAI,AAAW,+CAAG;AAChB,kBAAa,wBAAN,KAAK;;AAEd,gBAAO,AAAe,gBAAA;;AAExB,cAAO;;IAEX;;IASkB;WAWE;IAAQ;;AAW1B,qBAAO,AAcN;AAbC,uBAAK;AACsB,UAAzB,2BAAqB;AACV,UAAX;;AAGI,sBAAU;AACqD,QAArE,YAAU,aAAM,WAAM,wBAAW;AACjC;AACiB,UAAf,YAAO,OAAO;;AAEA,UAAd,YAAO,OAAO;;AAEhB,cAAO;;IAEX;;;IA3GQ,iBAAc,aAAM,WAAM;IAmF9B,2BAAqB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IA4BgC","file":"../../../../../../../../../../../V:/packages/state_notifier/state_notifier.dart.lib.js"}');
+  // Exports:
+  return {
+    state_notifier: state_notifier
+  };
+}));
+
+//# sourceMappingURL=state_notifier.dart.lib.js.map

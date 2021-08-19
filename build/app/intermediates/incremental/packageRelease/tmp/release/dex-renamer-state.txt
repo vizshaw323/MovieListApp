@@ -1,0 +1,4 @@
+#Thu Aug 19 22:05:25 IST 2021
+base.0=V\:\\androidproj\\new\\movie_app\\build\\app\\intermediates\\transforms\\r8\\release\\0\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

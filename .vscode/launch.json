@@ -10,7 +10,13 @@
             "type": "dart",
             "args": [
                 "--dart-define=movieApiKey=afdcd475833e8e0d4d610c1bbaa5bfbd"
-            ],
+            ]
+        },
+        {
+            "name": "Flutter (lib\\main.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib\\main.dart"
         }
     ]
 }
